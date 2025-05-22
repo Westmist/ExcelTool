@@ -1,0 +1,15 @@
+path:
+  input: ./input
+  metaOutput: ./output/meta
+  jsonOutput: ./output/json
+head:
+  packageName: com.lcc.test
+  imps:
+    - com.lcc.*
+excel:
+  snName: sn
+  # 竖表
+  vertical:
+    - Vtest
+json:
+  pretty: true
