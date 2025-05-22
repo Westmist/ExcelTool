@@ -23,9 +23,7 @@ public enum FieldType {
     STR("string", new BaseConvert.StringConvert()),
 
     STR_ARR("string[]", GenericArrayConvert.STRING_ARRAY_CONVERT),
-
     INT_ARR("int[]", GenericArrayConvert.INTEGER_ARRAY_CONVERT),
-
 
     NT_LIST("list[int]", GenericListConvert.INT_LIST_CONVERT),
 
