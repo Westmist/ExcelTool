@@ -8,8 +8,8 @@ import ${imp};
 
 /**
 * ${sheetDescribe}
-* 源文件名：${excelName}-${sheetName}
-* 该文件为生成的文件，修改无效
+* Source file excel ${excelName}  sheet: ${sheetName}
+* This file is generated automatically. Any modifications will be lost.
 *
 <#list fields as field>
 * @param ${field.name} ${field.describe}
