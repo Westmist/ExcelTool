@@ -12,7 +12,7 @@ head:
     - java.util.List
     - java.util.stream.Collectors
     - java.util.stream.Stream
-    - org.mingxuan.util.JsonUtil
+    - org.mingxuan.project.JsonUtil
 excel:
   snName: sn
   # 竖表

@@ -1,4 +1,4 @@
-package org.mingxuan.util;
+package org.mingxuan.project;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

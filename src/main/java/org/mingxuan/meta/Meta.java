@@ -2,7 +2,7 @@ package org.mingxuan.meta;
 
 import lombok.Data;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.mingxuan.util.JsonUtil;
+import org.mingxuan.project.JsonUtil;
 
 import java.util.*;
 
@@ -78,19 +78,31 @@ public class Meta {
     private Set<OutputType> outputTypeSet = new HashSet<>();
 
     public String toJson() {
-        List<Map<String, Object>> jsonData = new ArrayList<>();
+        return metaType == HORIZONTAL ? doHorizontalToJson() : doVerticalToJson();
+    }
 
-        for (int i = 0; i < data.size(); i++) {
+    private String doHorizontalToJson() {
+        List<Map<String, Object>> jsonData = new ArrayList<>();
+        for (List<Object> row : data) {
             Map<String, Object> rowMap = new LinkedHashMap<>();
-            List<Object> row = data.get(i);
             for (int j = 0; j < row.size(); j++) {
-                Field field = metaType == HORIZONTAL ? fields.get(j) : fields.get(i);
+                Field field = fields.get(j);
                 if (!OutputType.S.included(field.getOutputTypeSet())) {
                     continue;
                 }
                 rowMap.put(field.getName(), row.get(j));
             }
             jsonData.add(rowMap);
+        }
+        return JsonUtil.toJson(jsonData);
+    }
+
+    private String doVerticalToJson() {
+        Map<String, Object> jsonData = new HashMap<>();
+        List<Object> dataFirst = data.getFirst();
+        for (int i = 0; i < fields.size(); i++) {
+            Field field = fields.get(i);
+            jsonData.put(field.getName(), dataFirst.get(i));
         }
         return JsonUtil.toJson(jsonData);
     }

@@ -5,6 +5,7 @@ import org.mingxuan.config.AppConfig;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static org.mingxuan.constant.ExcelConst.HORIZONTAL_INDEX.*;
 import static org.mingxuan.constant.ExcelConst.VERTICAL_INDEX.*;
@@ -39,13 +40,17 @@ public class MetaTransition {
             if (outTypeStr.isEmpty() || dataTypeStr.isEmpty() || dataNameStr.isEmpty()) {
                 continue;
             }
+            Set<OutputType> outputTypes = OutputType.of(outTypeStr);
+            if (!OutputType.S.included(outputTypes)) {
+                continue;
+            }
 
             Field field = new Field();
             field.setIndex(i);
             field.setName(dataNameStr);
             field.setDescribe(dataDescStr);
             field.setDataType(FieldType.getType(dataTypeStr));
-            field.setOutputTypeSet(OutputType.of(outTypeStr));
+            field.setOutputTypeSet(outputTypes);
             meta.getFields().add(field);
             meta.getOutputTypeSet().addAll(field.getOutputTypeSet());
             if (snName.equals(field.getName())) {
@@ -95,6 +100,7 @@ public class MetaTransition {
 
     public static void vertical(Meta meta) {
         Sheet sheet = meta.getSheet();
+        List<Object> rowData = new ArrayList<>();
         for (int i = V_DATA_FIRST_ROW; i <= sheet.getLastRowNum(); i++) {
             Row row = sheet.getRow(i);
             if (row == null) {
@@ -126,11 +132,10 @@ public class MetaTransition {
             meta.getFields().add(field);
             meta.getOutputTypeSet().addAll(field.getOutputTypeSet());
 
-            List<Object> rowData = new ArrayList<>();
-            Object object = fieldType.getConvert().convert(dataStr);
-            rowData.add(object);
-            meta.getData().add(rowData);
+            Object fieldData = fieldType.getConvert().convert(dataStr);
+            rowData.add(fieldData);
         }
+        meta.getData().add(rowData);
     }
 
     private static String readCell(Cell cell) {
