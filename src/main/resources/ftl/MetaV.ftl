@@ -8,7 +8,7 @@ import ${imp};
 
 /**
 * ${sheetDescribe}
-* Source file excel ${excelName}  sheet: ${sheetName}
+* Source file excel: ${excelName}  sheet: ${sheetName}
 * This file is generated automatically. Any modifications will be lost.
 *
 <#list fields as field>
@@ -23,7 +23,7 @@ public record ${metaName}(
     private volatile static ${metaName} meta;
 
     public static void load(String json) {
-        meta = JsonUtils.fromJson(json, ${metaName}.class);
+        meta = JsonUtil.toObject(json, ${metaName}.class);
     }
 
     public static ${metaName} meta() {

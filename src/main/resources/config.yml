@@ -1,11 +1,18 @@
 path:
   input: ./input
   metaOutput: ./output/meta
+#  metaOutput: src/test/java/meta
   jsonOutput: ./output/json
 head:
-  packageName: com.lcc.test
+  packageName: meta
   imps:
-    - com.lcc.*
+    - java.util.Map
+    - java.util.LinkedHashMap
+    - java.util.Collection
+    - java.util.List
+    - java.util.stream.Collectors
+    - java.util.stream.Stream
+    - org.mingxuan.util.JsonUtil
 excel:
   snName: sn
   # 竖表

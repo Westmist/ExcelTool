@@ -8,7 +8,7 @@ import ${imp};
 
 /**
 * ${sheetDescribe}
-* Source file excel ${excelName}  sheet: ${sheetName}
+* Source file excel: ${excelName}  sheet: ${sheetName}
 * This file is generated automatically. Any modifications will be lost.
 *
 <#list fields as field>
@@ -23,7 +23,7 @@ public record ${metaName}(
     public volatile static Map<${snType}, ${metaName}> dataMap = new LinkedHashMap<>();
 
     public static void load(String json) {
-        ${metaName}[] dataArr = JsonUtils.fromJson(json, ${metaName}[].class);
+        ${metaName}[] dataArr = JsonUtil.toObject(json, ${metaName}[].class);
         Map<${snType}, ${metaName}> newDataMap = new LinkedHashMap<>();
         for (${metaName} data : dataArr) {
             newDataMap.put(data.sn, data);
